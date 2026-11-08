@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arabic Root Lab V4 · From Root to Meaning</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet"><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><script>(function(){var mq=window.matchMedia('(max-width:720px), (max-height:720px), (hover: none) and (pointer: coarse)');var sw=Math.min(screen.width||0,screen.height||0);var phone=mq.matches||((navigator.maxTouchPoints||0)>0&&sw>0&&sw<=1100);if(!phone)return;document.documentElement.classList.add('phone');var meta=document.querySelector('meta[name="viewport"]');if(!meta)return;meta.setAttribute('content','width=device-width,initial-scale=1,viewport-fit=cover');if(sw&&document.documentElement.clientWidth>sw+40)meta.setAttribute('content','width='+sw+',initial-scale=1,viewport-fit=cover')})();</script><title>Arabic Root Lab V4 · From Root to Meaning</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet"><style>
 :root{--bg:#f6f6f3;--canvas:#fcfcfa;--ink:#1d2936;--muted:#687a89;--muted2:#95a4af;--border:#dfe6e8;--blue:#2b73bd;--blueWash:#e7f0fb;--gold:#bb7627;--goldWash:#fff1db;--green:#208871;--greenWash:#e8f6f0;--ease:cubic-bezier(.19,.83,.23,1);--ar:'Amiri','Scheherazade New','Noto Naskh Arabic',serif;--ui:'DM Sans',Inter,system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink)}body{font-family:var(--ui);-webkit-font-smoothing:antialiased}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #8ab5e3;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.3}
 .app{height:100dvh;min-height:0;display:flex;flex-direction:column;gap:12px;padding:15px 18px 18px;max-width:1920px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;min-height:49px;padding:0 3px}.brand{display:flex;flex-direction:column;align-items:flex-start;gap:0}.brand-title{font-weight:800;font-size:20px;letter-spacing:-.045em}.brand-sub{font-size:10px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#8a9aa7;margin-top:4px}.top-tag{font-size:11px;font-weight:700;letter-spacing:.035em;color:#9aa7b0}
@@ -37,6 +37,7 @@
 @media(max-width:1200px){.workspace{grid-template-columns:minmax(240px,28%) minmax(0,72%)}.concept-head{font-size:clamp(22px,2.8vw,32px)}.concept-unit{padding:14px 11px}.concept-slots{font-size:36px}.concept-cv{font-size:32px}.family-grid{grid-template-columns:repeat(4,1fr);top:26%}.word-scene{width:min(92%,760px)}.break-scene{padding:44px 22px 36px}.source-col{right:clamp(14px,2.4vw,36px)}}
 @media(max-width:900px){.workspace{grid-template-columns:minmax(210px,32%) minmax(0,68%)}.concept-scene{padding:48px 22px 56px}.concept-head{font-size:26px}.break-board{padding:16px 14px 14px}.ref-example .english{max-width:72px}}
 @media(max-width:720px),(max-height:720px),(hover:none) and (pointer:coarse){.workspace{display:flex;flex-direction:column}.side{flex:0 0 auto;max-height:36dvh}.stage{flex:1;min-height:58dvh}.concept-head{font-size:24px}.concept-formula{max-width:750px}.concept-scene{padding:48px 18px}.ref-card{padding:9px}.family-grid{grid-template-columns:repeat(3,1fr)}}
+html.phone .workspace{display:flex;flex-direction:column}html.phone .side{flex:0 0 auto;max-height:36dvh}html.phone .stage{flex:1;min-height:58dvh}html.phone .concept-head{font-size:24px}html.phone .concept-formula{max-width:750px}html.phone .concept-scene{padding:48px 18px}html.phone .ref-card{padding:9px}html.phone .family-grid{grid-template-columns:repeat(3,1fr)}
 @media(max-width:580px){.concept-head{font-size:22px}.concept-formula{flex-wrap:wrap;gap:6px}.concept-unit{flex-basis:36%;min-width:120px;padding:9px}.concept-math{font-size:19px}.concept-slots{min-height:42px;font-size:28px}.concept-cv{min-height:42px;font-size:24px}.concept-unknown{min-height:42px;font-size:46px}.concept-arabic{font-size:24px}.concept-deck{font-size:12px}.concept-cta{padding:16px 28px}.concept-cta-latin{font-size:18px}.concept-cta-ar{font-size:26px}.latin-line{font-size:clamp(28px,8vw,43px)}.arabic-word{font-size:clamp(52px,16vw,76px)}.word-scene.quiz-position .arabic-word{font-size:70px}.quiz-card{font-size:11px;min-height:69px}.quiz-area{width:94%}.stage{min-height:0}.break-arabic{font-size:clamp(32px,10vw,56px)}}
 @media(max-height:820px){.line-caption{margin:22px 0 8px}.arabic-line{padding:22px 8px 16px}.gloss-line{margin-top:14px}.concept-launch{margin-top:12px}.concept-unknown{font-size:52px}.change-callout{bottom:16px;padding:8px 12px}.break-scene{padding:36px 18px 28px}}
 .stage{container-type:size}
@@ -119,6 +120,7 @@
 .answer-button.retake:hover{background:#f4f7fa}
 .answer-button[hidden]{display:none!important}
 @media(max-width:720px),(max-height:720px),(hover:none) and (pointer:coarse){.quiz-cards{grid-template-columns:1fr;gap:8px}.quiz-card{min-height:58px}.quiz-key{width:38px;height:38px;font-size:20px}}
+html.phone .quiz-cards{grid-template-columns:1fr;gap:8px}html.phone .quiz-card{min-height:58px}html.phone .quiz-key{width:38px;height:38px;font-size:20px}
 .word-scene.newroot-position{top:0;max-width:min(1100px,90%);width:90%}
 .overline{font-size:clamp(22px,2.45vw,30px);font-weight:800;letter-spacing:-.03em;text-transform:none;color:#1a2d3d;line-height:1.28;max-width:min(34em,100%);margin:0 auto 42px}
 .stage-meta,.stage-step{display:none!important}
@@ -170,12 +172,14 @@
 @keyframes ctaGlow{0%,100%{box-shadow:0 0 0 1px rgba(43,115,189,.12),0 8px 22px rgba(43,115,189,.1),0 0 16px rgba(43,115,189,.2),0 0 36px rgba(90,164,232,.14);border-color:rgba(90,164,232,.42)}50%{box-shadow:0 0 0 1px rgba(43,115,189,.26),0 12px 28px rgba(43,115,189,.16),0 0 34px rgba(43,115,189,.42),0 0 72px rgba(90,164,232,.3);border-color:rgba(120,184,242,.72)}}
 .concept-cta-latin{color:var(--blue);font-weight:800;letter-spacing:.2em}
 .concept-cta-ar{color:var(--blue)}
-@media(max-width:720px),(max-height:720px),(hover:none) and (pointer:coarse){
-.app{padding:max(8px,env(safe-area-inset-top,0px)) 8px max(10px,env(safe-area-inset-bottom,0px));gap:8px}
+html.phone{
+overflow-x:hidden;width:100%;max-width:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%;
+body,.app{overflow-x:hidden;max-width:100%}
+.app{padding:max(4px,env(safe-area-inset-top,0px)) 6px max(6px,env(safe-area-inset-bottom,0px));gap:6px}
 .top{min-height:36px;padding:0}
 .brand-title{font-size:16px}
 .brand-sub{font-size:8px;margin-top:2px;letter-spacing:.12em}
-.workspace{display:flex;flex-direction:column;gap:8px;min-height:0}
+.workspace{display:flex;flex-direction:column;gap:6px;min-height:0;min-width:0}
 .side{flex:0 0 auto;max-height:none;border-radius:16px}
 .bank-heading{padding:8px 12px 6px;gap:8px}
 .bank-heading .title,.bank-count{font-size:15px}
@@ -200,8 +204,8 @@
 .source-col .arabic-piece{height:1.12em}
 .stage.quiz .source-col{top:8px;right:auto;font-size:clamp(16px,5.4vw,24px)}
 .concept-scene,.word-scene,.family-view,.break-scene{position:relative;inset:auto;left:auto;right:auto;top:auto;bottom:auto;transform:none;width:100%;max-width:none;height:auto;max-height:none;flex:1;min-height:0}
-.concept-scene{overflow:auto;padding:48px 14px 16px;justify-content:space-evenly;gap:12px;-webkit-overflow-scrolling:touch}
-.concept-head{font-size:17px;line-height:1.3;letter-spacing:-.03em}
+.concept-scene{overflow:auto;padding:24px 10px 12px;justify-content:center;gap:10px;-webkit-overflow-scrolling:touch}
+.concept-head{font-size:20px;line-height:1.3;letter-spacing:-.03em}
 .concept-deck{font-size:12px;line-height:1.45;margin:0}
 .concept-formula{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:6px;margin-top:0}
 .concept-math{display:grid;width:100%;height:22px;flex:none;align-self:center}
@@ -219,16 +223,16 @@
 .concept-cta{padding:10px 20px 12px;min-width:0}
 .concept-cta-latin{font-size:15px}
 .concept-cta-ar{font-size:22px;margin-top:4px}
-.word-scene,.word-scene.quiz-position,.word-scene.newroot-position,.stage.quiz .word-scene{overflow:auto;padding:48px 12px 36px;justify-content:space-evenly;width:100%;top:auto;transform:none;height:auto;max-height:none;gap:10px}
+.word-scene,.word-scene.quiz-position,.word-scene.newroot-position,.stage.quiz .word-scene{overflow:auto;padding:32px 8px 16px;justify-content:center;width:100%;top:auto;transform:none;height:auto;max-height:none;gap:8px}
 .word-cluster{gap:4px}
 .overline{font-size:16px;max-width:none;margin:0 auto;line-height:1.3}
 .line-name,.line-caption{margin:0;font-size:9px}
-.latin-line{font-size:clamp(22px,8vw,32px);line-height:1.2}
-.pattern-line{font-size:clamp(14px,5vw,20px)}
-.arabic-line{padding:10px 4px 4px}
-.arabic-stage,.arabic-word,.word-scene.quiz-position .arabic-word{font-size:clamp(40px,14vw,64px)}
+.latin-line{font-size:clamp(28px,9.5vw,44px);line-height:1.2;max-width:100%}
+.pattern-line{font-size:clamp(16px,5.6vw,24px)}
+.arabic-line{padding:8px 0 2px;max-width:100%}
+.arabic-stage,.arabic-word,.word-scene.quiz-position .arabic-word{font-size:clamp(56px,19vw,88px)}
 .word-below{gap:4px;margin-top:4px}
-.gloss-line{font-size:clamp(16px,5vw,22px)}
+.gloss-line{font-size:clamp(18px,6vw,26px)}
 .ipa-line{font-size:13px}
 .word-scene .change-callout{margin-top:10px;padding:10px 14px;font-size:13px;max-width:100%}
 .quiz-clue,.stage.quiz .quiz-clue{display:none!important}
@@ -238,7 +242,7 @@
 .quiz-cards{grid-template-columns:1fr;gap:8px}
 .quiz-card{min-height:48px;padding:8px 10px;font-size:14px}
 .quiz-choice{font-size:14px}
-.family-view.on{display:flex;flex-direction:column;overflow:auto;padding:52px 10px 12px}
+.family-view.on{display:flex;flex-direction:column;overflow:auto;padding:28px 10px 12px}
 .family-top{position:static;top:auto;transform:none;white-space:normal;padding:0 0 8px}
 .family-top .root{font-size:36px;line-height:1.35}
 .family-grid{position:static;top:auto;left:auto;right:auto;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:0 0 8px}
@@ -246,9 +250,9 @@
 .family-item .ar{font-size:22px;line-height:1.55}
 .family-item .latin,.family-item .eng,.family-item .pattern{font-size:10px;margin-top:2px}
 .stage.family .change-callout{position:static;left:auto;bottom:auto;transform:none;margin:8px auto 0;max-width:100%;padding:10px 14px;font-size:13px}
-.break-scene{overflow:auto;padding:40px 10px 152px;justify-content:stretch;align-items:stretch}
+.break-scene{overflow:auto;padding:28px 8px 152px;justify-content:stretch;align-items:stretch}
 .break-stack{justify-content:space-evenly;gap:8px;flex:1;min-height:0}
-.break-arabic{font-size:clamp(28px,11vw,48px);padding:8px 0 0;line-height:1.65}
+.break-arabic{font-size:clamp(36px,14vw,64px);padding:8px 0 0;line-height:1.65}
 .break-row{grid-template-columns:repeat(6,minmax(0,1fr));column-gap:3px}
 .break-latin .break-seg{font-size:10px;padding:4px 1px}
 .break-mean .break-seg{font-size:9px;line-height:1.25;padding:2px 1px}
@@ -276,11 +280,11 @@
 .canvas-info[hidden]{display:none!important}
 .break-hint{margin:0 0 10px;width:100%;text-align:center;font-size:13px;font-weight:650;color:#6e8290;letter-spacing:.01em;line-height:1.4}
 @media(min-width:721px) and (min-height:721px) and (hover:hover){
-.stage.break .hover-tip.slide,.stage.break .hover-tip.slide.rich{left:44px;right:auto;bottom:auto;top:50%;width:min(260px,24%);max-width:min(260px,24%);margin:0;border-radius:0;padding:0;pointer-events:auto;overflow:visible;transform:translateY(-50%);z-index:24}
-.stage.break .hover-tip.slide .tip-close{position:static;width:auto;height:auto;border:0;background:transparent;box-shadow:none}
-.stage.break .hover-tip.slide .tip-inner{padding:14px 16px 14px;display:block}
-.stage.break .hover-tip.slide .tip-head span{font-size:28px;padding:0}
-.stage.break .hover-tip.slide .tip-body{margin:0}
+html:not(.phone) .stage.break .hover-tip.slide,html:not(.phone) .stage.break .hover-tip.slide.rich{left:44px;right:auto;bottom:auto;top:50%;width:min(260px,24%);max-width:min(260px,24%);margin:0;border-radius:0;padding:0;pointer-events:auto;overflow:visible;transform:translateY(-50%);z-index:24}
+html:not(.phone) .stage.break .hover-tip.slide .tip-close{position:static;width:auto;height:auto;border:0;background:transparent;box-shadow:none}
+html:not(.phone) .stage.break .hover-tip.slide .tip-inner{padding:14px 16px 14px;display:block}
+html:not(.phone) .stage.break .hover-tip.slide .tip-head span{font-size:28px;padding:0}
+html:not(.phone) .stage.break .hover-tip.slide .tip-body{margin:0}
 }
 @media(max-height:720px){
 .break-scene{padding-bottom:152px}
@@ -299,13 +303,11 @@
 .stage.break .hover-tip.slide .tip-body{grid-area:body;margin:0;font-size:11px;line-height:1.35;padding-top:4px}
 }
 @media(max-width:540px){
-.ref-card{width:188px;flex-basis:188px}
-.concept-head{font-size:16px}
-.latin-line{font-size:24px}
-.pattern-line{font-size:13px}
-.arabic-stage,.arabic-word{font-size:clamp(36px,13vw,52px)}
-.family-grid{gap:6px}
-.family-item .ar{font-size:20px}
+html:not(.phone) .ref-card{width:188px;flex-basis:188px}
+html:not(.phone) .concept-head{font-size:16px}
+html:not(.phone) .latin-line{font-size:24px}
+html:not(.phone) .pattern-line{font-size:13px}
+html:not(.phone) .arabic-stage,html:not(.phone) .arabic-word{font-size:clamp(36px,13vw,52px)}
 }
 </style></head><body><div class="app">
   <header class="top"><div class="brand"><div class="brand-title">Arabic Root Lab</div><div class="brand-sub">An interactive morphology workshop</div></div><div class="top-tag">ROOTS × PATTERNS → WORDS</div></header>
@@ -455,7 +457,9 @@ const BREAKWORD=[
 ];
 const BANKROOT={root_ktb:{ar:'ك ت ب',roman:'k–t–b',english:'writing / written text',title:'Root: consonantal skeleton',pat:'C₁ · C₂ · C₃',desc:'The semantic family'},root_aml:{ar:'ع م ل',roman:'ʿ–m–l',english:'work / action',title:'New root: transfer test',pat:'C₁ · C₂ · C₃',desc:'A different semantic family'}};
 let step=0,selected=null,revealed=false,busy=false,lastHovered=null,tipPinned=false,ready=true,runId=0,pending=null,skipAnim=false;
-function isTouchUI(){return window.matchMedia('(max-width:720px), (max-height:720px), (hover: none) and (pointer: coarse)').matches}
+function isPhoneShell(){const sw=Math.min(screen.width||0,screen.height||0);return window.matchMedia('(max-width:720px), (max-height:720px), (hover: none) and (pointer: coarse)').matches||((navigator.maxTouchPoints||0)>0&&sw>0&&sw<=1100)}
+function syncPhoneShell(){const on=isPhoneShell();document.documentElement.classList.toggle('phone',on);if(!on)return;const sw=Math.min(screen.width,screen.height);const meta=document.querySelector('meta[name="viewport"]');if(meta&&sw&&document.documentElement.clientWidth>sw+40)meta.setAttribute('content','width='+sw+',initial-scale=1,viewport-fit=cover')}
+function isTouchUI(){return document.documentElement.classList.contains('phone')||window.matchMedia('(max-width:720px), (max-height:720px), (hover: none) and (pointer: coarse)').matches}
 function isNarrow(){return isTouchUI()}
 function isTapHold(){return isTouchUI()||navigator.maxTouchPoints>0}
 function isTouchPtr(e){return !e||e.pointerType==='touch'||e.pointerType==='pen'||isTapHold()}
@@ -599,6 +603,7 @@ $('bankList').addEventListener('click',e=>{const card=e.target.closest('[data-le
 $('revealAnswer').addEventListener('click',()=>{if(revealed){retakeQuiz();return}if(selected===null)return;revealed=true;const f=word();put('gloss',f.gloss);$('gloss').classList.remove('pending-gloss');$('gloss').classList.add('revealed-gloss');makeQuiz();bank();$('gloss').animate([{transform:'translateY(14px)',clipPath:'inset(0 100% 0 0)'},{transform:'translateY(0)',clipPath:'inset(0 0 0 0)'}],{duration:1250,easing:'ease-out'});});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&tipPinned){e.preventDefault();cleanHover();return}if(['BUTTON','INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;if(['ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();advance(e.key==='ArrowRight'?1:-1)}});
 $('stage').addEventListener('click',e=>{if(!tipPinned||isTapHold())return;if(e.target.closest('#hoverTip')||e.target.closest('[data-slot]')||e.target.closest('.mark-target'))return;cleanHover()});
-window.addEventListener('resize',()=>{if(tipPinned&&lastHovered){if(cur().kind==='break'){const ar=$('breakArabic')&&$('breakArabic').querySelector(`.break-hit[data-slot="${lastHovered}"]`);if(ar)placeBreakTip(ar)}else placeRibbonTip()}else cleanHover();if(cur().kind==='word'||cur().kind==='quiz')markTargets();if(cur().kind==='break')fitBreakBoard()});document.fonts?.ready.then(()=>{if(cur().kind==='word'||cur().kind==='quiz')markTargets();if(cur().kind==='break')fitBreakBoard()});render();
+syncPhoneShell();
+window.addEventListener('resize',()=>{syncPhoneShell();if(tipPinned&&lastHovered){if(cur().kind==='break'){const ar=$('breakArabic')&&$('breakArabic').querySelector(`.break-hit[data-slot="${lastHovered}"]`);if(ar)placeBreakTip(ar)}else placeRibbonTip()}else cleanHover();if(cur().kind==='word'||cur().kind==='quiz')markTargets();if(cur().kind==='break')fitBreakBoard()});document.fonts?.ready.then(()=>{if(cur().kind==='word'||cur().kind==='quiz')markTargets();if(cur().kind==='break')fitBreakBoard()});render();
 })();
 </script></body></html>
