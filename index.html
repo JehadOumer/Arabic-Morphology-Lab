@@ -157,7 +157,7 @@ html.phone .quiz-cards{grid-template-columns:1fr;gap:4px}html.phone .quiz-card{m
 .haraka-float.alef{width:.08em;height:.16em}
 .tip-close{position:static;flex:none;width:auto;height:auto;margin:0;padding:0;border:0;background:transparent;box-shadow:none;color:#8a7040;font:400 18px/1 var(--ui);cursor:pointer;z-index:2}
 .tip-close:hover{color:#4a3a20}
-.concept-unit{position:relative;container-type:inline-size;justify-content:center;min-height:168px;padding:44px 18px 38px}
+.concept-unit{position:relative;container-type:inline-size;justify-content:center;min-height:168px;padding:18px}
 .concept-unit.gold-unit{flex:1.62}
 .concept-unit .concept-label,.concept-unit.gold-unit .concept-label{position:absolute;top:14px;left:10px;right:10px;margin:0;z-index:1}
 .concept-unit .concept-meaning,.concept-unit.gold-unit .concept-meaning{position:absolute;left:10px;right:10px;bottom:12px;margin:0;padding:0;z-index:1}
@@ -202,7 +202,7 @@ body,.app{overflow:hidden;max-width:100%;height:100%}
 .skip-toggle{height:30px;padding:0 8px;font-size:10px;letter-spacing:0}
 .skip-toggle[hidden]{display:none!important}
 .stage-replay{width:30px;height:30px}
-.source-col{display:flex;left:8px;top:8px;right:auto;transform:none;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:.12em;padding:2px 4px;min-width:0;max-width:calc(100% - 176px);font-size:clamp(16px,5.4vw,24px);z-index:12}
+.source-col{display:flex;left:8px;top:8px;right:auto;transform:none;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:.12em;padding:2px 4px;min-width:0;max-width:min(42%,calc(100% - 148px));font-size:clamp(15px,5vw,22px);z-index:12}
 .source-col.hidden{display:none!important}
 .source-col .arabic-piece{height:1.12em}
 .stage.quiz .source-col{top:8px;right:auto;font-size:clamp(16px,5.4vw,24px)}
@@ -227,24 +227,29 @@ body,.app{overflow:hidden;max-width:100%;height:100%}
 .concept-cta-latin{font-size:13px}
 .concept-cta-ar{font-size:18px;margin-top:2px}
 .concept-cta-kicker{font-size:12px;margin:0}
-.word-scene,.word-scene.newroot-position{overflow:hidden;padding:40px 16px 14px;justify-content:space-evenly;width:100%;top:auto;transform:none;height:auto;max-height:none;gap:2px}
-.word-scene.quiz-position,.stage.quiz .word-scene{overflow:hidden;padding:32px 12px 0;justify-content:flex-start;width:100%;top:auto;transform:none;height:auto;max-height:none;gap:0;flex:0 1 auto;min-height:0}
-.word-scene.quiz-position .line-name,.word-scene.quiz-position .line-caption,.word-scene.quiz-position .pattern-line,.word-scene.quiz-position .gloss-line,.word-scene.quiz-position .ipa-line{display:none}
-.word-scene.quiz-position .latin-line{font-size:clamp(18px,6cqi,26px)}
-.word-scene.quiz-position .arabic-stage,.word-scene.quiz-position .arabic-word{font-size:clamp(34px,11cqi,52px)}
-.word-cluster{gap:2px}
+.word-scene,.word-scene.newroot-position{overflow:hidden;padding:48px 14px 10px;justify-content:flex-start;align-items:center;width:100%;top:auto;transform:none;height:auto;max-height:none;gap:5px;box-sizing:border-box}
+.word-scene.quiz-position,.stage.quiz .word-scene{overflow:hidden;padding:48px 12px 4px;justify-content:flex-start;width:100%;top:auto;transform:none;height:auto;max-height:none;gap:3px;flex:0 1 auto;min-height:0}
+.word-scene.quiz-position .gloss-line,.word-scene.quiz-position .ipa-line{display:none}
+.word-scene.quiz-position .gloss-line.revealed-gloss{display:block;font-size:14px;margin-top:2px}
+.word-scene.quiz-position .latin-line{font-size:clamp(18px,6cqi,24px)}
+.word-scene.quiz-position .pattern-line{font-size:clamp(12px,3.8cqi,16px)}
+.word-scene.quiz-position .arabic-stage,.word-scene.quiz-position .arabic-word{font-size:clamp(32px,10cqi,48px)}
+.word-cluster{gap:1px;flex:none;width:100%;max-width:100%}
 .overline{font-size:15px;max-width:none;margin:0 auto;line-height:1.25}
-.line-name,.line-caption{margin:0;font-size:9px}
-.latin-line{font-size:clamp(20px,7cqi,32px);line-height:1.15;max-width:100%}
-.pattern-line{font-size:clamp(13px,4.4cqi,18px)}
-.arabic-line{padding:2px 0;max-width:100%}
-.arabic-stage,.arabic-word,.word-scene.quiz-position .arabic-word{font-size:clamp(40px,12.5cqi,62px)}
-.word-below{gap:2px;margin-top:0}
-.gloss-line{font-size:clamp(15px,4.6cqi,20px)}
-.ipa-line{font-size:12px}
+.line-name,.line-caption{margin:0;font-size:8px;letter-spacing:.12em}
+.latin-line{font-size:clamp(22px,7cqi,30px);line-height:1.1;max-width:100%;white-space:nowrap}
+.pattern-line{font-size:clamp(13px,4.2cqi,17px);line-height:1.15;white-space:nowrap}
+.arabic-line{padding:2px 0;margin:2px 0;max-width:100%;flex:none}
+.arabic-stage,.arabic-word{font-size:clamp(42px,12cqi,58px)}
+.word-scene.quiz-position .arabic-word{font-size:clamp(32px,10cqi,48px)}
+.word-below{gap:2px;margin-top:8px;padding-top:6px;border-top:1px solid #edf2f5;flex:none;width:min(280px,88%)}
+.gloss-line{font-size:clamp(15px,4.4cqi,19px);margin-top:0}
+.ipa-line{font-size:11px;margin-top:0}
+.word-scene.quiz-position .word-below{border-top:0;padding-top:0;margin-top:2px;width:100%}
+.stage:not(.break) .canvas-info{display:none!important}
 .word-scene .change-callout{margin-top:0;padding:8px 12px;font-size:12px;max-width:100%}
 .quiz-clue,.stage.quiz .quiz-clue{display:none!important}
-.quiz-area,.quiz-area.on{position:relative;left:auto;top:auto;bottom:auto;transform:none;width:100%;flex:0 0 auto;max-height:none;overflow:hidden;margin-top:auto;padding:0 8px 8px;gap:5px}
+.quiz-area,.quiz-area.on{position:relative;left:auto;top:auto;bottom:auto;transform:none;width:100%;flex:0 0 auto;max-height:none;overflow:hidden;margin-top:8px;padding:0 8px 8px;gap:5px}
 .quiz-question{font-size:12px;max-width:none;padding:0 4px;line-height:1.25}
 .quiz-panel{padding:5px;border-radius:12px}
 .quiz-cards{grid-template-columns:1fr;gap:4px}
@@ -338,7 +343,6 @@ html:not(.phone) .arabic-stage,html:not(.phone) .arabic-word{font-size:clamp(36p
         <p class="concept-deck">The root suggests a family of meanings. Vowels and affixes help shape a word's form and grammatical role.</p>
         <div class="concept-formula">
           <div class="concept-unit">
-            <div class="concept-label">Constants ROOT · MEANING</div>
             <div class="concept-slots">
               <span data-source="r1">C₁</span><span class="concept-star">*</span>
               <span data-source="r2">C₂</span><span class="concept-star">*</span>
@@ -347,17 +351,13 @@ html:not(.phone) .arabic-stage,html:not(.phone) .arabic-word{font-size:clamp(36p
           </div>
           <div class="concept-math plus" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 8v16M8 16h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
           <div class="concept-unit gold-unit">
-            <div class="concept-label">PATTERN · FORM</div>
             <div class="concept-cv" aria-label="affixes can appear before, between, and after the root consonants; vowels can appear between consonants and at the end">
               <span class="cv-x">x</span><span class="cv-c">C₁</span><span class="cv-x">x</span><span class="cv-v">v</span><span class="cv-c">C₂</span><span class="cv-x">x</span><span class="cv-v">v</span><span class="cv-c">C₃</span><span class="cv-x">x</span><span class="cv-v">v</span>
             </div>
-            <div class="concept-meaning">v = vowels · x = affixes</div>
           </div>
           <div class="concept-math arrow" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 16h18M17 9l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="concept-unit result-unit">
-            <div class="concept-label">WORD</div>
             <div class="concept-unknown">?</div>
-            <div class="concept-meaning">What will emerge?</div>
           </div>
         </div>
         <div class="concept-launch">
