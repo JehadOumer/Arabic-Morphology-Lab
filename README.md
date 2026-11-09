@@ -26,6 +26,7 @@ This is a **demo release**. It is a static web app and is meant to be used as a 
 - **Transfer root ع م ل** (*ʿ–m–l*, work / action) with two prediction quizzes (عَامِل *ʿāmil* “worker”, مَعْمَل *maʿmal* “factory / laboratory”).
 - **Packed-word close** — Qurʾān 15:22 فَأَسْقَيْنَاكُمُوهُ broken into linked pieces (conjunction, verb, subject, objects), with POS/DEP tags and a lexical tooltip.
 - **Desktop and phone layouts** — hover on large screens, tap on phones; last-page tooltip as a left card (desktop) or a bottom bar (phone).
+- **Dialect map demo** — MADAR CORPUS-25 table view of “This room is too small” across 25 cities ([live](https://jehadoumer.github.io/Arabic-Morphology-Lab/madar-dialect-map.html)).
 
 ## Run it locally
 
@@ -41,7 +42,8 @@ Then open [http://127.0.0.1:8788/](http://127.0.0.1:8788/).
 
 | File | Role |
 | --- | --- |
-| `index.html` | The lab |
+| `index.html` | The morphology lab |
+| `madar-dialect-map.html` | MADAR dialect tables demo |
 | `amiri-forms.json` | Amiri glyph outlines used to join letters |
 
 Fonts (DM Sans, Amiri, Scheherazade New) are loaded from Google Fonts.

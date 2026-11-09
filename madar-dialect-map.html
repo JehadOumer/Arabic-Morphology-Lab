@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MADAR Dialect Tables · This room is too small</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f1ec;--panel:#fffcf8;--ink:#1a2d3d;--muted:#6e8290;--line:#d9e0e5;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer}
+.app{min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.top{width:100%;padding:16px 20px;background:var(--panel);border-bottom:1px solid var(--line)}
+.top-inner,.main{width:100%;max-width:980px;margin:0 auto}
+.kicker{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+h1{margin:0;font-size:22px;letter-spacing:-.04em}
+.lead{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.45}
+.lead strong{color:var(--ink)}
+.group-label{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700}
+.seg button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.mode-note{font-size:12px;color:var(--muted);line-height:1.45;margin:10px 0 0}
+.main{flex:1;padding:16px 20px 32px}
+.head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin:0 0 12px}
+.head h2{margin:0;font-size:18px;letter-spacing:-.03em}
+.head p{margin:0;font-size:12px;color:var(--muted)}
+.frame{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}
+th{background:#fffcf8;text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 8px;border-bottom:1px solid var(--line);font-weight:800}
+th.ar{text-align:right}
+td{padding:9px 8px;border-bottom:1px solid #eef1f3;vertical-align:top;word-wrap:break-word;overflow-wrap:anywhere}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:#f7f4ef}
+.city{font-weight:800;font-size:12px}
+.country{color:var(--muted);font-size:11px}
+.sent,.ar{font-family:Amiri,serif;font-size:17px;direction:rtl;line-height:1.35}
+.ar{font-size:16px;font-weight:700}
+.tr{font-family:ui-monospace,Consolas,monospace;font-size:10px;color:#4d6575;line-height:1.4}
+.en{font-size:12px;font-weight:600;line-height:1.35}
+.pos,.note{font-family:ui-monospace,Consolas,monospace;font-size:10px;color:#3a4d5c;line-height:1.4}
+.cite{margin:0 0 12px;font-size:12px;color:var(--muted);line-height:1.5;max-width:78ch}
+.cite em{font-style:italic;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="top-inner">
+      <p class="kicker">MADAR · CORPUS-25</p>
+      <h1>Dialect tables</h1>
+      <p class="cite">This interface is an adaptation of the example mentioned in Bouamor, H., Habash, N., Salameh, M., Zaghouani, W., Rambow, O., Abdulrahim, D., … &amp; Oflazer, K. (2018, May). <em>The MADAR Arabic dialect corpus and lexicon</em>. In Proceedings of the eleventh international conference on language resources and evaluation (LREC 2018).</p>
+      <p class="lead">Base English: <strong>This room is too small.</strong> Compare full sentences or one word across cities.</p>
+      <p class="group-label">View</p>
+      <div class="seg" id="viewSeg">
+        <button type="button" data-view="sentence" class="on">Full sentence</button>
+        <button type="button" data-view="THIS">This</button>
+        <button type="button" data-view="ROOM">Room</button>
+        <button type="button" data-view="SMALL">Small</button>
+        <button type="button" data-view="VERY">Very / too</button>
+      </div>
+      <p class="mode-note" id="modeNote"></p>
+    </div>
+  </header>
+  <main class="main" id="main"></main>
+</div>
+<script>
+const COUNTRY = {
+  Beirut:'Lebanon', Cairo:'Egypt', Doha:'Qatar', Rabat:'Morocco', Tunis:'Tunisia',
+  Aleppo:'Syria', Alexandria:'Egypt', Algiers:'Algeria', Amman:'Jordan', Aswan:'Egypt',
+  Baghdad:'Iraq', Basra:'Iraq', Benghazi:'Libya', Damascus:'Syria', Fes:'Morocco',
+  Jeddah:'Saudi Arabia', Jerusalem:'Palestine', Khartoum:'Sudan', Mosul:'Iraq',
+  Muscat:'Oman', Riyadh:'Saudi Arabia', Salt:'Jordan', Sanaa:'Yemen', Sfax:'Tunisia',
+  Tripoli:'Libya'
+};
+
+const ALIGNMENTS = [{"label":"Beirut","text":"هالأوضة كتير زغيرة.","THIS":{"form":"هالـ","hsb":"hAl","note":"fused onto room"},"ROOM":{"form":"أوضة","surface":"هالأوضة","hsb":"’AwDh"},"IS":{"form":null},"SMALL":{"form":"زغيرة","hsb":"zyɣrh"},"VERY":{"form":"كتير","hsb":"ktyr"}},{"label":"Cairo","text":"الأوضة دي صغيرة أوي.","THIS":{"form":"دي","hsb":"dy","note":"postposed after room"},"ROOM":{"form":"الأوضة","hsb":"Al’AwDh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"أوي","hsb":"’Awy"}},{"label":"Doha","text":"هالغرفة واجد صغيرة.","THIS":{"form":"هالـ","hsb":"hAl","note":"fused onto room"},"ROOM":{"form":"غرفة","surface":"هالغرفة","hsb":"ɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"واجد","hsb":"wAjd"}},{"label":"Rabat","text":"هاد الغرفة صغيرة بزاف.","THIS":{"form":"هاد","hsb":"hAd"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"بزاف","hsb":"bzAf"}},{"label":"Tunis","text":"لبيت هذي صغيرة برشا.","THIS":{"form":"هذي","hsb":"hðy","note":"postposed after room"},"ROOM":{"form":"لبيت","hsb":"lbyt","note":"house/room"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"برشا","hsb":"bršA"}},{"label":"Aleppo","text":"هالغرفة كتير صغيرة.","THIS":{"form":"هالـ","hsb":"hAl","note":"fused onto room"},"ROOM":{"form":"غرفة","surface":"هالغرفة","hsb":"ɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"كتير","hsb":"ktyr"}},{"label":"Alexandria","text":"الأوضة دي صغيرة جدا.","THIS":{"form":"دي","hsb":"dy","note":"postposed after room"},"ROOM":{"form":"الأوضة","hsb":"Al’AwDh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"جدا","hsb":"jd’A"}},{"label":"Algiers","text":"هاذ الغرفة صغيرة بزاف.","THIS":{"form":"هاذ","hsb":"hAð"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"بزاف","hsb":"bzAf"}},{"label":"Amman","text":"هاي الغرفة كتير صغيرة.","THIS":{"form":"هاي","hsb":"hAy"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"كتير","hsb":"ktyr"}},{"label":"Aswan","text":"الأوضة دي صغيرة خالص.","THIS":{"form":"دي","hsb":"dy","note":"postposed after room"},"ROOM":{"form":"الأوضة","hsb":"Al’AwDh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"خالص","hsb":"xAlS"}},{"label":"Baghdad","text":"هاي الغرفة كولش صغيرة.","THIS":{"form":"هاي","hsb":"hAy"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"كولش","hsb":"kwlš"}},{"label":"Basra","text":"هاي الغرفة كلش صغيرة.","THIS":{"form":"هاي","hsb":"hAy"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"كلش","hsb":"klš"}},{"label":"Benghazi","text":"الدار صغيرة بكل.","THIS":{"form":null,"note":"no separate demonstrative; definite الدار only"},"ROOM":{"form":"الدار","hsb":"AldAr","note":"house/home used for room"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"بكل","hsb":"bkl"}},{"label":"Damascus","text":"هالغرفة صغيرة كتير.","THIS":{"form":"هالـ","hsb":"hAl","note":"fused onto room"},"ROOM":{"form":"غرفة","surface":"هالغرفة","hsb":"ɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"كتير","hsb":"ktyr","note":"after adjective"}},{"label":"Fes","text":"هاد الغرفة صغيرة بزاف.","THIS":{"form":"هاد","hsb":"hAd"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"بزاف","hsb":"bzAf"}},{"label":"Jeddah","text":"الغرفة دي مرا صغيرة.","THIS":{"form":"دي","hsb":"dy","note":"postposed after room"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"مرا","hsb":"mrA"}},{"label":"Jerusalem","text":"هاي الغرفة كتير صغيرة.","THIS":{"form":"هاي","hsb":"hAy"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"كتير","hsb":"ktyr"}},{"label":"Khartoum","text":"الغرفة دي صغيرة شديد.","THIS":{"form":"دي","hsb":"dy","note":"postposed after room"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"شديد","hsb":"šdyd"}},{"label":"Mosul","text":"الغرفه كلش صغيغي.","THIS":{"form":null,"note":"no separate demonstrative; definite only"},"ROOM":{"form":"الغرفه","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيغي","hsb":"Sɣyɣy"},"VERY":{"form":"كلش","hsb":"klš"}},{"label":"Muscat","text":"هالحجره وايد صغيرة.","THIS":{"form":"هالـ","hsb":"hAl","note":"fused onto room"},"ROOM":{"form":"حجره","surface":"هالحجره","hsb":"Hjrh","note":"room/chamber"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"وايد","hsb":"wAyd"}},{"label":"Riyadh","text":"الغرفة صغيرة جداً.","THIS":{"form":null,"note":"no separate demonstrative; definite only"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"جداً","hsb":"jd’A"}},{"label":"Salt","text":"هاي الغرفة كثير صغيرة.","THIS":{"form":"هاي","hsb":"hAy"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"كثير","hsb":"kθyr"}},{"label":"Sanaa","text":"الغرفة صغيرة قوي.","THIS":{"form":null,"note":"no separate demonstrative; definite only"},"ROOM":{"form":"الغرفة","hsb":"Alɣrfh"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"قوي","hsb":"qwy"}},{"label":"Sfax","text":"البيت هذه ياسر صغيرة.","THIS":{"form":"هذه","hsb":"hðh","note":"postposed after room"},"ROOM":{"form":"البيت","hsb":"Albyt","note":"house used for room"},"IS":{"form":null},"SMALL":{"form":"صغيرة","hsb":"Sɣyrh"},"VERY":{"form":"ياسر","hsb":"yAsr"}},{"label":"Tripoli","text":"الدار هادي صغيره هلبه.","THIS":{"form":"هادي","hsb":"hAdy","note":"postposed after room"},"ROOM":{"form":"الدار","hsb":"AldAr","note":"house/home used for room"},"IS":{"form":null},"SMALL":{"form":"صغيره","hsb":"Sɣyrh"},"VERY":{"form":"هلبه","hsb":"hlbh"}}];
+
+const SLOT_EN = { THIS:'this', ROOM:'room', IS:'is', SMALL:'small', VERY:'too / very' };
+const SLOT_POS = { THIS:'DEM', ROOM:'NOUN', IS:'AUX', SMALL:'ADJ', VERY:'ADV' };
+
+const MEANING = {
+  THIS: {
+    'هالـ':'this (fused)', 'دي':'this', 'هاي':'this', 'هاد':'this', 'هاذ':'this',
+    'هذي':'this', 'هادي':'this', 'هذه':'this', '∅':'(none · definite only)'
+  },
+  ROOM: {
+    'غرفة':'room', 'الغرفة':'the room', 'الغرفه':'the room',
+    'أوضة':'room', 'الأوضة':'the room',
+    'لبيت':'house / room', 'البيت':'the house',
+    'الدار':'the house / home', 'حجره':'chamber / room'
+  },
+  SMALL: {
+    'صغيرة':'small', 'صغيره':'small',
+    'زغيرة':'small (dialect form)', 'صغيغي':'tiny / smallish'
+  },
+  VERY: {
+    'كتير':'very', 'كثير':'very / much', 'بزاف':'so / a lot', 'برشا':'a lot',
+    'ياسر':'very', 'أوي':'really / so', 'جدا':'very', 'جداً':'very',
+    'واجد':'quite a lot', 'وايد':'quite a lot', 'كلش':'totally', 'كولش':'totally',
+    'بكل':'altogether / totally', 'خالص':'completely / utterly',
+    'شديد':'intensely / severely', 'مرا':'really / once over',
+    'قوي':'strongly / powerfully', 'هلبه':'a lot'
+  }
+};
+
+const NOTES = {
+  sentence: 'Full Arabic sentence with transliteration, POS, and alignment notes.',
+  THIS: 'Demonstrative forms across cities. Original sentence on the right.',
+  ROOM: 'Nouns used for “room” (including house / chamber). Original sentence on the right.',
+  SMALL: 'Adjective forms for “small / tiny”. Original sentence on the right.',
+  VERY: 'Intensifiers for “too / very”. Original sentence on the right.'
+};
+
+const TITLES = {
+  sentence: 'Sentence comparison',
+  THIS: 'Word: This',
+  ROOM: 'Word: Room',
+  SMALL: 'Word: Small',
+  VERY: 'Word: Very / too'
+};
+
+let view = 'sentence';
+
+function normForm(slot, city){
+  const cell = city[slot];
+  if(!cell || cell.form == null || cell.form === '') return '∅';
+  return cell.form.replace(/[ًٌٍَُِّْ]/g,'').trim();
+}
+
+function trio(slot, city){
+  const cell = city[slot] || {};
+  const ar = cell.form == null || cell.form === '' ? '∅' : cell.form;
+  const tr = cell.hsb || '—';
+  const key = normForm(slot, city);
+  const en = (MEANING[slot] && MEANING[slot][key]) || SLOT_EN[slot] || '—';
+  return { ar, tr, en, note: cell.note || '' };
+}
+
+function sentenceNotes(city){
+  return ['THIS','ROOM','SMALL','VERY']
+    .map(slot => city[slot] && city[slot].note)
+    .filter(Boolean)
+    .join(' · ') || '—';
+}
+
+function linearTokens(city){
+  const thisT = trio('THIS', city);
+  const roomT = trio('ROOM', city);
+  const smallT = trio('SMALL', city);
+  const veryT = trio('VERY', city);
+  const thisPost = !!(city.THIS && city.THIS.note && /postposed/i.test(city.THIS.note));
+  const toks = [];
+  if(thisT.ar !== '∅' && !thisPost) toks.push({ tr:thisT.tr, pos:'DEM' });
+  toks.push({ tr:roomT.tr, pos:'NOUN' });
+  if(thisT.ar !== '∅' && thisPost) toks.push({ tr:thisT.tr, pos:'DEM' });
+  const smallForm = city.SMALL && city.SMALL.form ? city.SMALL.form : '';
+  const veryForm = city.VERY && city.VERY.form ? city.VERY.form : '';
+  const si = smallForm ? city.text.indexOf(smallForm) : -1;
+  const vi = veryForm ? city.text.indexOf(veryForm) : -1;
+  const veryFirst = vi >= 0 && si >= 0 && vi < si;
+  if(veryFirst){
+    toks.push({ tr:veryT.tr, pos:'ADV' });
+    toks.push({ tr:smallT.tr, pos:'ADJ' });
+  } else {
+    toks.push({ tr:smallT.tr, pos:'ADJ' });
+    toks.push({ tr:veryT.tr, pos:'ADV' });
+  }
+  return toks;
+}
+
+function sentenceTranslit(city){
+  return linearTokens(city).map(t => t.tr && t.tr !== '—' ? t.tr : '').filter(Boolean).join(' ');
+}
+function sentencePOS(city){
+  return linearTokens(city).map(t => t.pos).join(' · ');
+}
+
+function sortedCities(){
+  return [...ALIGNMENTS].sort((a,b)=>a.label.localeCompare(b.label));
+}
+
+function renderSentenceTable(){
+  const rows = sortedCities().map(city => `
+    <tr>
+      <td class="city">${city.label}</td>
+      <td class="country">${COUNTRY[city.label] || '—'}</td>
+      <td class="sent">${city.text}</td>
+      <td class="tr">${sentenceTranslit(city)}</td>
+      <td class="pos">${sentencePOS(city)}</td>
+      <td class="note">${sentenceNotes(city)}</td>
+    </tr>`).join('');
+  return `
+    <div class="head">
+      <h2>${TITLES.sentence}</h2>
+      <p>Base: <strong>This room is too small.</strong></p>
+    </div>
+    <div class="frame">
+      <table>
+        <colgroup>
+          <col style="width:10%"><col style="width:11%"><col style="width:26%">
+          <col style="width:16%"><col style="width:13%"><col style="width:24%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>City</th><th>Country</th><th class="ar">Sentence</th>
+            <th>Transliteration</th><th>POS</th><th>Note</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderWordTable(slot){
+  const rows = sortedCities().map(city => {
+    const t = trio(slot, city);
+    return `
+      <tr>
+        <td class="city">${city.label}</td>
+        <td class="country">${COUNTRY[city.label] || '—'}</td>
+        <td class="ar">${t.ar}</td>
+        <td class="tr">${t.tr}</td>
+        <td class="en">${t.en}</td>
+        <td class="pos">${SLOT_POS[slot]}</td>
+        <td class="note">${t.note || '—'}</td>
+        <td class="sent">${city.text}</td>
+      </tr>`;
+  }).join('');
+  return `
+    <div class="head">
+      <h2>${TITLES[slot]}</h2>
+      <p>Target gloss: <strong>${SLOT_EN[slot]}</strong></p>
+    </div>
+    <div class="frame">
+      <table>
+        <colgroup>
+          <col style="width:9%"><col style="width:10%"><col style="width:11%">
+          <col style="width:12%"><col style="width:14%"><col style="width:7%">
+          <col style="width:14%"><col style="width:23%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>City</th><th>Country</th><th class="ar">Arabic</th>
+            <th>Transliteration</th><th>English</th><th>POS</th><th>Note</th>
+            <th class="ar">Sentence</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+function paint(){
+  document.getElementById('modeNote').textContent = NOTES[view];
+  document.getElementById('main').innerHTML =
+    view === 'sentence' ? renderSentenceTable() : renderWordTable(view);
+}
+
+document.getElementById('viewSeg').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-view]');
+  if(!btn) return;
+  view = btn.dataset.view;
+  document.querySelectorAll('#viewSeg button').forEach(b => b.classList.toggle('on', b === btn));
+  paint();
+});
+
+paint();
+</script>
+</body>
+</html>
