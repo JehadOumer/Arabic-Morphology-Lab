@@ -110,8 +110,8 @@ const MEANING = {
 };
 
 const NOTES = {
-  sentence: 'Full Arabic sentence with transliteration, POS, and alignment notes.',
-  THIS: 'Demonstrative forms across cities. Original sentence on the right.',
+  sentence: 'Full Arabic sentence with transliteration and POS.',
+  THIS: 'Demonstrative forms across cities, with placement notes. Original sentence on the right.',
   ROOM: 'Nouns used for “room” (including house / chamber). Original sentence on the right.',
   SMALL: 'Adjective forms for “small / tiny”. Original sentence on the right.',
   VERY: 'Intensifiers for “too / very”. Original sentence on the right.'
@@ -140,13 +140,6 @@ function trio(slot, city){
   const key = normForm(slot, city);
   const en = (MEANING[slot] && MEANING[slot][key]) || SLOT_EN[slot] || '—';
   return { ar, tr, en, note: cell.note || '' };
-}
-
-function sentenceNotes(city){
-  return ['THIS','ROOM','SMALL','VERY']
-    .map(slot => city[slot] && city[slot].note)
-    .filter(Boolean)
-    .join(' · ') || '—';
 }
 
 function linearTokens(city){
@@ -193,7 +186,6 @@ function renderSentenceTable(){
       <td class="sent">${city.text}</td>
       <td class="tr">${sentenceTranslit(city)}</td>
       <td class="pos">${sentencePOS(city)}</td>
-      <td class="note">${sentenceNotes(city)}</td>
     </tr>`).join('');
   return `
     <div class="head">
@@ -203,13 +195,13 @@ function renderSentenceTable(){
     <div class="frame">
       <table>
         <colgroup>
-          <col style="width:10%"><col style="width:11%"><col style="width:26%">
-          <col style="width:16%"><col style="width:13%"><col style="width:24%">
+          <col style="width:12%"><col style="width:13%"><col style="width:34%">
+          <col style="width:23%"><col style="width:18%">
         </colgroup>
         <thead>
           <tr>
             <th>City</th><th>Country</th><th class="ar">Sentence</th>
-            <th>Transliteration</th><th>POS</th><th>Note</th>
+            <th>Transliteration</th><th>POS</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -218,6 +210,7 @@ function renderSentenceTable(){
 }
 
 function renderWordTable(slot){
+  const showNote = slot === 'THIS';
   const rows = sortedCities().map(city => {
     const t = trio(slot, city);
     return `
@@ -228,7 +221,7 @@ function renderWordTable(slot){
         <td class="tr">${t.tr}</td>
         <td class="en">${t.en}</td>
         <td class="pos">${SLOT_POS[slot]}</td>
-        <td class="note">${t.note || '—'}</td>
+        ${showNote ? `<td class="note">${t.note || '—'}</td>` : ''}
         <td class="sent">${city.text}</td>
       </tr>`;
   }).join('');
@@ -240,14 +233,16 @@ function renderWordTable(slot){
     <div class="frame">
       <table>
         <colgroup>
-          <col style="width:9%"><col style="width:10%"><col style="width:11%">
-          <col style="width:12%"><col style="width:14%"><col style="width:7%">
-          <col style="width:14%"><col style="width:23%">
+          <col style="width:10%"><col style="width:11%"><col style="width:12%">
+          <col style="width:14%"><col style="width:15%"><col style="width:8%">
+          ${showNote ? '<col style="width:14%">' : ''}
+          <col style="width:${showNote ? '16%' : '30%'}">
         </colgroup>
         <thead>
           <tr>
             <th>City</th><th>Country</th><th class="ar">Arabic</th>
-            <th>Transliteration</th><th>English</th><th>POS</th><th>Note</th>
+            <th>Transliteration</th><th>English</th><th>POS</th>
+            ${showNote ? '<th>Note</th>' : ''}
             <th class="ar">Sentence</th>
           </tr>
         </thead>
